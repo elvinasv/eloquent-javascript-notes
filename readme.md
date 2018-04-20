@@ -139,4 +139,4 @@ normalize.call({coords: [0, 2, 3], length: 5});
 	- Functions derive from `Function.prototype`.
 	- Arrays derive from `Array.prototype`.
 - **Classes**
-	- If you put keyword `new` in front of a function call, its treated as an constructor. 
+	- If you put keyword `new` in front of a function call, its treated as an constructor.
