@@ -7,6 +7,7 @@
 	- [Chapter 3 - Functions](#chapter-3-functions)
 	- [Chapter 4 - Data Structures](#chapter-4-data-structures)
 	- [Chapter 5 - Higher-order functions](#chapter-5-higher-order-functions)
+	- [Chapter 6 - OOP](#chapter-6-oop)
 
 <!-- /TOC -->
 ## Chapter 3 - Functions
@@ -119,4 +120,23 @@ console.log(reduce([1, 2, 3, 4], (a, b) => a + b, 0));
 ```
 - Strings and character codes
   - Unicode and UTF-16, where some characters might take two units (and cause some issues). Solution - use `codePointAt(0)` on character (which will be a string of one or two code units) to get its code.
-- **Recognizing text**
+
+## Chapter 6 - OOP
+- **Encapsulation** - separating interface from implementation.
+- **Methods** - properties that hold function values.
+	- **This** - When a function is called as a method—looked up as a property and immediately called, as in `object.method()` —the binding called `this` in its body automatically points at the object that it was called on. (Think about context)
+	- Each function has its own `this` binding.
+	- Arrow functions don't bind their own `this`, but can see `this` binding of the scope around them.
+```js
+function normalize() {
+console.log(this.coords.map(n => n / this.length));
+}
+normalize.call({coords: [0, 2, 3], length: 5});
+// → [0, 0.4, 0.6]
+//it wouldn't work with .map(function(this.lengh)) as it would define a new binding.
+```
+- **Prototypes** - another object that is used as a fallback source of properties. Its shared among all instances of constructor. (Recipe for creating an object).
+	- Functions derive from `Function.prototype`.
+	- Arrays derive from `Array.prototype`.
+- **Classes**
+	- If you put keyword `new` in front of a function call, its treated as an constructor. 
