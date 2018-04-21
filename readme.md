@@ -140,3 +140,66 @@ normalize.call({coords: [0, 2, 3], length: 5});
 	- Arrays derive from `Array.prototype`.
 - **Classes**
 	- If you put keyword `new` in front of a function call, its treated as an constructor.
+	- In ES6 there's a better way to write a class.
+```js
+//Class keyword starts class declaration, which allows to define a constructor. Methods are defined in a single place.
+class Rabbit {
+	constructor(type) {
+		this.type = type;
+	}
+	speak(line) {
+		console.log(`The ${this.type} rabbit says '${line}'`);
+	}
+}
+let killerRabbit = new Rabbit("killer");
+let blackRabbit = new Rabbit("black");
+```
+- **Map** object holds key-value pairs. Any value (both objects and primitive values) may be used as either a key or a value.
+```js
+let ages = new Map();
+ages.set("Boris", 39);
+ages.set("Liang", 22);
+ages.set("Júlia", 62);
+console.log(`Júlia is ${ages.get("Júlia")}`);
+// → Júlia is 62
+console.log("Is Jack's age known?", ages.has("Jack"));
+// → Is Jack's age known? false
+```
+- **Symbols** - Every symbol value returned from Symbol() is unique.
+	- It can be used as an **identifier for object properties**.
+  - The only sensible usage is to store the symbol and then use the stored value to create an object property. The following example stores the symbol in a "var".
+```js
+var  myPrivateMethod  = Symbol();
+this[myPrivateMethod] = function() {...};
+```
+	- The Symbol class has some static properties. Examples of well-known symbols are: `Symbol.iterator` for array-like objects, and `Symbol.search` for string objects.
+	- More info: https://developer.mozilla.org/en-US/docs/Glossary/Symbol
+- **Getters, setters and statics**
+```js
+class Temperature {
+	constructor(celsius) {
+		this.celsius = celsius;
+	}
+	get fahrenheit() {
+		return this.celsius * 1.8 + 32;
+	}
+	set fahrenheit(value) {
+		this.celsius = (value - 32) / 1.8;
+	}
+	//methods that have static before the methods are stored on the constructor
+	static fromFahrenheit(value) {
+		return new Temperature((value - 32) / 1.8);
+	}
+}
+let temp = new Temperature(22);
+console.log(temp.fahrenheit);
+// → 71.6
+temp.fahrenheit = 86;
+console.log(temp.celsius);
+// → 30
+```
+- **Instanceof operator** - useful to know whether an object was derived from a specific class
+```js
+console.log([1,2,3] instanceof Array);
+//--> true
+```
