@@ -167,13 +167,14 @@ console.log("Is Jack's age known?", ages.has("Jack"));
 ```
 - **Symbols** - Every symbol value returned from Symbol() is unique.
 	- It can be used as an **identifier for object properties**.
-  - The only sensible usage is to store the symbol and then use the stored value to create an object property. The following example stores the symbol in a "var".
-```js
-var  myPrivateMethod  = Symbol();
-this[myPrivateMethod] = function() {...};
-```
+	- The only sensible usage is to store the symbol and then use the stored value to create an object property. The following example stores the symbol in a "var".
 	- The Symbol class has some static properties. Examples of well-known symbols are: `Symbol.iterator` for array-like objects, and `Symbol.search` for string objects.
 	- More info: https://developer.mozilla.org/en-US/docs/Glossary/Symbol
+```js
+	var  myPrivateMethod  = Symbol();
+	this[myPrivateMethod] = function() {...};
+```
+
 - **Getters, setters and statics**
 ```js
 class Temperature {
