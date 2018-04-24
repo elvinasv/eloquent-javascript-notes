@@ -141,8 +141,10 @@ normalize.call({coords: [0, 2, 3], length: 5});
 - **Classes**
 	- If you put keyword `new` in front of a function call, its treated as an constructor.
 	- In ES6 there's a better way to write a class.
+
 ```js
 //Class keyword starts class declaration, which allows to define a constructor. Methods are defined in a single place.
+//ES6
 class Rabbit {
 	constructor(type) {
 		this.type = type;
@@ -153,7 +155,18 @@ class Rabbit {
 }
 let killerRabbit = new Rabbit("killer");
 let blackRabbit = new Rabbit("black");
+
+//ES5
+function Rabbit(type) {
+	this.type = type;
+}
+Rabbit.prototype.speak = function(line) {
+	console.log(`The ${this.type} rabbit says '${line}'`);
+};
+
+let weirdRabbit = new Rabbit("weird");
 ```
+
 - **Map** object holds key-value pairs. Any value (both objects and primitive values) may be used as either a key or a value.
 ```js
 let ages = new Map();
@@ -171,8 +184,8 @@ console.log("Is Jack's age known?", ages.has("Jack"));
 	- The Symbol class has some static properties. Examples of well-known symbols are: `Symbol.iterator` for array-like objects, and `Symbol.search` for string objects.
 	- More info: https://developer.mozilla.org/en-US/docs/Glossary/Symbol
 ```js
-	var  myPrivateMethod  = Symbol();
-	this[myPrivateMethod] = function() {...};
+var  myPrivateMethod  = Symbol();
+this[myPrivateMethod] = function() {...};
 ```
 
 - **Getters, setters and statics**
@@ -198,6 +211,9 @@ console.log(temp.fahrenheit);
 temp.fahrenheit = 86;
 console.log(temp.celsius);
 // → 30
+// to create a temperature using degrees Fahrenheit.
+// Static methods are often used to create utility functions.
+Temperature.fromFahrenheit(100)
 ```
 - **Instanceof operator** - useful to know whether an object was derived from a specific class
 ```js
