@@ -6,7 +6,7 @@
 
 function flattening(arr) {
 	let flatArr = [];
-	flatArr = arr.reduce((flatArr, current)=> flatArr.concat(current));
+	flatArr = arr.reduce((flatArr, current) => flatArr.concat(current));
 	return flatArr;
 }
 

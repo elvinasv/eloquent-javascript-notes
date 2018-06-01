@@ -42,17 +42,17 @@ function rangeStep(start, end, step = 1) {
 		}
 	} else {
 		// descending
-		for (let i = start; i >= end; i += step){
+		for (let i = start; i >= end; i += step) {
 			result.push(i);
 		}
 	}
 	return result;
 }
 
-console.log(rangeStep(1,10,2))
+console.log(rangeStep(1,10,2));
 //--> [1,3,5,7,9]
 
-console.log(rangeStep(5,2,-1))
+console.log(rangeStep(5,2,-1));
 //--> [5, 4, 3, 2] 
 
 
@@ -118,7 +118,8 @@ function arrayToList(array) {
 }
 
 
-//My code
+// My code
+// Hardcoded
 function listToArray(list){
 	let arr = [];
 	arr.push(list.value);

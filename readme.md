@@ -19,15 +19,15 @@
 
 ```js
 // Defining a function
-const squareDef = function(x){
+const squareDefining = function(x){
   return x * x;
 };
-console.log(squareDef(12));
+console.log(squareDefining(12));
 // -> 144
 
 // Declaring notation
-console.log(squareDec)
-function squareDec(x) {
+console.log(squareDeclaring(11))
+function squareDeclaring(x) {
   return x * x;
 }
 ```
@@ -51,7 +51,7 @@ let twice = multiplier(2);
 console.log(twice(5));
 // → 10
 ```
-- Functions that are called for their **side effects** vs for **return values**. The ones that are called for return for return values are more flexible.
+- Functions that are called for their **side effects** vs for **return values**. The ones that are called for return values are more flexible.
 ## Chapter 4 - Data Structures
 Objects
 - Peanuts eater example - http://eloquentjavascript.net/code/chapter/04_data.js
@@ -187,6 +187,21 @@ console.log("Is Jack's age known?", ages.has("Jack"));
 var  myPrivateMethod  = Symbol();
 this[myPrivateMethod] = function() {...};
 ```
+- **Iterators** - For a structure to be a data source, it needs to allow and say how its data should be consumed. This is done through **iterators**. Therefore, a data source needs to follow the iterator protocol.
+```js
+//Group (structure) is a data source
+[Symbol.iterator](){
+	let data = this.members.slice();
+		return {// <- Iterator object
+			next(){
+				return {
+					done: data.length === 0,
+					value: data.pop()
+			}
+		}
+	}
+}
+```
 
 - **Getters, setters and statics**
 ```js
@@ -219,4 +234,82 @@ Temperature.fromFahrenheit(100)
 ```js
 console.log([1,2,3] instanceof Array);
 //--> true
+```
+
+## Chapter 7 - Project: A robot
+- **Graph** - a collection of points (villages) with lines between them (roads).
+- Data structures that don't change are called immutable or persistent.
+- Anything that makes your code easier to understand makes it possible to  build a more ambitious system.
+
+## Chapter 8 - Bugs and errors
+- **Strict mode** - `"use strict";` - make the JS stricter.
+ 	- reports errors when let/var is not used while declaring a variable.
+ 	- `this` binding holds the value `undefined` in functions that are not called as methods.
+	 	- adding strict mode rarely hurts and often helps to spot a problem.
+- **Types** - describe function types.
+	- There are several dialects that add types to the JS, such as TypeScript. Gives more rigor to the program.
+- **Automated testing** - the process of writing a program that tests another program.
+	- Takes some time to write, but immediately shows if something breaks.
+```js
+function test(label, body) {
+	if (!body()) console.log(`Failed: ${label}`);
+}
+test("convert Latin text to uppercase", () => {
+	return "hello".toUpperCase() == "HELLO";
+});
+test("convert Greek text to uppercase", () => {
+	return "Χαίρετε".toUpperCase() == "ΧΑΊΡΕΤΕ";
+});
+```
+	- Test suites - software that helps to build and run a collection of tests.
+	- Self-contained persistent values are easier to test than changing objects (OOP vs Functional).
+- **Debugging** - rather than making random choices, analyze the code, think what's happening.
+	- If you include `debugger` in the code and browser's developer tool is active, the program stops at that point. (!)
+- **Exceptions** - when function cannot proceed normally, jump to a place that knows how to handle it (exception handling).
+	- When exception is raise/thrown, it jumps out of a current function AND out of its caller. All the way down to the first caller or try/catch statement (unwinding the stack).
+		- As it zooming out, catch the exception and do something to address it.
+
+```js
+function promptDirection(question) {
+	let result = prompt(question);
+	if (result.toLowerCase() == "left") return "L";
+	if (result.toLowerCase() == "right") return "R";
+	// Throw is used to raise the exception
+	throw new Error("Invalid direction: " + result);
+}
+function look() {
+	if (promptDirection("Which way?") == "L") {
+		return "a house";
+	} else {"two angry bears";}
+}
+// Catching the exception
+try {
+	console.log("You see", look());
+} catch (error) {
+	console.log("Something went wrong: " + error);
+}
+```
+```js
+try {
+    //tryCode - Block of code to try
+}
+catch(err) {
+    //catchCode - Block of code to handle errors
+}
+finally {
+    //finallyCode - Block of code to be executed regardless of the try / catch result
+}
+```
+- Programming style, when we compute new values instead of changing the old ones, helps to prevent unexpected errors.
+	- I.e. if code stops in the middle of computing a new value, no-one is seeing a half-finished value.
+- **Assertions** - checks inside a program that verify that something is the way it is supposed to be.
+	- Don't write them for any input, but for the mistakes you're most likely to make.
+```js
+// An example of assertions.
+function firstElement(array) {
+	if (array.length == 0) {
+		throw new Error("MultiplicatorUnitFailure.");
+	}
+		return array[0];
+	}
 ```
