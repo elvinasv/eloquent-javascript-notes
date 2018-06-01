@@ -8,6 +8,9 @@
 	- [Chapter 4 - Data Structures](#chapter-4-data-structures)
 	- [Chapter 5 - Higher-order functions](#chapter-5-higher-order-functions)
 	- [Chapter 6 - OOP](#chapter-6-oop)
+	- [Chapter 7 - Project: A robot](#chapter-7-project-a-robot)
+	- [Chapter 8 - Bugs and errors](#chapter-8-bugs-and-errors)
+	- [Chapter 9 - Regular expressions](#chapter-9-regular-expressions)
 
 <!-- /TOC -->
 ## Chapter 3 - Functions
@@ -192,11 +195,11 @@ this[myPrivateMethod] = function() {...};
 //Group (structure) is a data source
 [Symbol.iterator](){
 	let data = this.members.slice();
-		return {// <- Iterator object
-			next(){
-				return {
-					done: data.length === 0,
-					value: data.pop()
+	return {// <- Iterator object
+		next(){
+			return {
+				done: data.length === 0,
+				value: data.pop()
 			}
 		}
 	}
@@ -313,3 +316,5 @@ function firstElement(array) {
 		return array[0];
 	}
 ```
+
+## Chapter 9 - Regular expressions
