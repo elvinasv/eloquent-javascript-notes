@@ -318,3 +318,66 @@ function firstElement(array) {
 ```
 
 ## Chapter 9 - Regular expressions
+- **Regular expressions** - a way to describe patterns in a string.
+- **Sets of characters** - `/[0-9.-]/`
+```js
+// To invert use a caret (^) (aka (!))
+let notBinary = /[^01]/;
+console.log(notBinary.test("1100100010100110"));
+// → false
+console.log(notBinary.test("1100100010200110"));
+// → true
+```
+- **Grouping subexpressions** - A part of a regular expression that is enclosed in parentheses counts as a single element.
+```js
+let cartoonCrying = /boo+(hoo+)+/i;
+console.log(cartoonCrying.test("Boohoooohoohooo"));
+// → true
+```
+- **Exec** - returns `null` if no match was found. Otherwise returns object with info about the match.
+
+```js
+let match = /\d+/.exec("one two 100");
+console.log(match);
+// → ["100"]
+console.log(match.index);
+// → 8
+function getDate(string) {
+	let arr = /(\d{1,2})-(\d{1,2})-(\d{4})/.exec(string);
+	return arr;
+}
+getDate("30-1-2003");
+// -> (4) ["30-1-2003", "30", "1", "2003", index: 0, input: "30-1-2003", groups: undefined]
+```
+
+- **Date class**
+	- Month start at index 0, hence December is 11.
+	- **Timestamp** - the number of milliseconds since the start of 1970 in the UTC.
+```js
+// getTime() - to/from timestamp;
+console.log(new Date(2013, 11, 19).getTime());
+// → 1387407600000
+console.log(new Date(1387407600000));
+// → Thu Dec 19 2013 00:00:00 GMT+0100 (CET)
+```
+- **Word and string boundaries**
+	- When the match must span the whole string, use caret `^` (matches the start of the string) and dollar sign `$` (matches the end of the string).
+	- `/^\d+$/` - a string consisting entirely of one or more digits.
+	- `/^!/` - matches a string starting with an exclamation mark.
+- **Replace**
+
+```js
+console.log("papa".replace("p", "m"));
+// → mapa
+// If g option is used, all matches in the string will be replaced.
+console.log("Borobudur".replace(/[ou]/g, "a"));
+// → Barabadar
+
+console.log(
+"Liskov, Barbara\nMcCarthy, John\nWadler, Philip"
+.replace(/(\w+), (\w+)/g, "$2 $1"));
+// Barbara Liskov
+// John McCarthy
+// Philip Wadler
+```
+-
